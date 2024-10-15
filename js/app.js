@@ -56,11 +56,20 @@ const renderCarrito = () => {
 botonAdd.forEach((botonAdd) => { // añadir curso
     botonAdd.addEventListener('click', () => {
         const cursoId = botonAdd.getAttribute('data-id');
+        if(carrito.some(curso => curso.id === cursoId)){
+            console.log('existe');
+            carrito = carrito.map(curso => {
+                curso.cantidad++;
+                return curso;
+            }) 
+            renderCarrito();
+        }else{
         const curso = document.querySelector(`[data-id="${cursoId}"]`);
         const padreCurso = curso.parentElement.parentElement;
         agregarCarrito(padreCurso);
        
-    })
+    }
+})
 })
 
 
